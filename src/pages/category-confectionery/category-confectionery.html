@@ -1,0 +1,61 @@
+<ion-header>
+
+  <ion-toolbar color="secondary">
+    <button ion-button menuToggle colour="dark">
+          <ion-icon name="menu"></ion-icon>
+      </button>  
+    <ion-title>Confectionery</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-left color="dark" (click)="cartTapped($event, page)">
+        <ion-icon name="cart"></ion-icon>
+          Cart
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content padding class="bg-style">
+	<div *ngIf="errorMessage" class="errorText">
+    {{errorMessage}}
+  </div>
+
+  <ion-list>    
+    <ion-item>
+      <ion-label item-center>
+        <b>Filter by Price</b>
+      </ion-label> 
+      <ion-range color="darker-orange" pin="true" dualKnobs="true" [(ngModel)]="priceFilter" min=1 max={{maxPrice}} (ionChange)="filterProductByPrice()"></ion-range>
+    </ion-item>  
+
+    <ion-label item-center>
+      Price Range: ${{priceFilter.lower}} - ${{priceFilter.upper}}
+    </ion-label>     
+  </ion-list>
+
+  <ion-grid>    
+    <ion-list *ngFor="let product of priceFilteredProducts">
+      <ion-row>      
+        <ion-col col-3>
+          <div style= "width: auto; height:auto">
+              <img src={{product.imgPath}} height="130" width="100"><br>
+            </div>  
+        </ion-col>
+      
+        <ion-col>
+          <ion-card class="card" (click)="viewProduct(product.productId)">
+            <ion-item text-wrap>
+              <b>Product Name:</b> <br/>
+              {{product.productName}}
+            </ion-item>
+        
+            <ion-item>        
+              <b>Product Price:</b>
+              ${{product.price}}
+            </ion-item>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-list>      
+  </ion-grid>
+</ion-content>

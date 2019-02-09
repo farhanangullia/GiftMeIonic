@@ -1,0 +1,96 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <button ion-button menuToggle color="dark">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Delivery and Payment</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="bg-style">
+  <div *ngIf="!updateCheckout" style="padding: 13px">
+    <form [formGroup]="updateDelivery" (ngSubmit)="updateDev(updateDeliveryForm)">
+      <h4>Delivery Details</h4>
+      <ion-item>
+        <ion-label fixed>Street Name</ion-label>
+        <ion-input type="text" formControlName="address" placeholder="Eg. 25 Kings Road" id="streetname" minlength="4" required="true"></ion-input>
+      </ion-item>
+      <br/>
+
+      <div *ngIf="address.invalid && (address.dirty || address.touched || submitted)" class="errorText">
+        <div *ngIf="address.errors.required">
+          Street name is required.
+        </div>
+        <div *ngIf="address.errors.minlength">
+          Street name must be at least 4 characters long.
+        </div>
+      </div>
+
+      <h4>Credit Card Details</h4>
+      <ion-item>
+        <ion-label fixed>Name</ion-label>
+        <ion-input type="text" formControlName="nameOnCard" placeholder="eg. Amy Ang Ai Ai" id="nameOnCard" required="true"></ion-input>
+      </ion-item>
+      <br/>
+
+      <div *ngIf="nameOnCard.invalid && (nameOnCard.dirty || nameOnCard.touched || submitted)" class="errorText">
+        <div *ngIf="nameOnCard.errors.required">
+          Card Holder Name is required.
+        </div>
+      </div>
+
+      <ion-item>
+        <ion-label fixed>Card Number</ion-label>
+        <ion-input type="text" formControlName="cardNumber" placeholder="eg. 0000111122223333" id="cardNumber" minLength="16" maxLength="16" required="true"></ion-input>
+      </ion-item>
+      <br/>
+
+      <div *ngIf="cardNumber.invalid && (cardNumber.dirty || cardNumber.touched || submitted)" class="errorText">
+        <div *ngIf="cardNumber.errors.required">
+          Card Number is required.
+        </div>
+        <div *ngIf="cardNumber.errors.minlength">
+          Card Number must be 16 characters long.
+        </div>
+        <div *ngIf="cardNumber.errors.maxlength">
+          Card Number must be 16 characters long.
+        </div>
+      </div>
+
+      <ion-item>
+        <ion-label fixed>Expiry Date</ion-label>
+        <ion-datetime displayFormat="MM/YYYY" formControlName="expiryDate" pickerFormat="MMMM YYYY" type="text" min="2018-04" max="2032" id="expiryDate" required="true"></ion-datetime>
+      </ion-item>
+      <br/>
+
+      <div *ngIf="expiryDate.invalid && (expiryDate.dirty || expiryDate.touched || submitted)" class="errorText">
+        <div *ngIf="expiryDate.errors.required">
+          Expiry date of card is required.
+        </div>
+      </div>
+
+      <ion-item>
+        <ion-label fixed>CVV</ion-label>
+        <ion-input type="password" formControlName="cvv" placeholder="eg. 123" id="cvv" minLength="3" maxLength="3" required="true"></ion-input>
+      </ion-item>
+      <br/>
+
+      <div *ngIf="cvv.invalid && (cvv.dirty || cvv.touched || submitted)" class="errorText">
+        <div *ngIf="cvv.errors.required">
+          CVV is required.
+        </div>
+        <div *ngIf="cvv.errors.minlength">
+          CVV must be 16 characters long.
+        </div>
+        <div *ngIf="cvv.errors.maxlength">
+          CVV must be 16 characters long.
+        </div>
+      </div>
+
+      <button type="submit" align="center" color="primary" ion-button outline [disabled]="!updateDelivery.valid">
+        Confirm Details
+      </button>
+    </form>
+  </div>
+
+</ion-content>

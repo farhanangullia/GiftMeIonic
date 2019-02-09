@@ -1,0 +1,122 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <ion-title>Register</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="bg-style">
+  <div>
+    <form [formGroup]="register" (ngSubmit)="signup(signupForm)">
+
+      <div *ngIf="email.invalid && (email.dirty || email.touched || submitted)" class="errorText">
+        <div *ngIf="email.errors.required">
+          Email is required.
+        </div>
+        <div *ngIf="email.errors.pattern && !email.errors.required">Invalid email address.</div>
+        <div *ngIf="email.errors.minlength">
+          Email must be at least 10 characters long.
+        </div>
+        <div *ngIf="email.errors.maxlength">
+          Email cannot exceed 50 characters.
+        </div>
+        <div *ngIf="email.errors.email">
+          Email must be valid.
+        </div>
+      </div>
+
+      <ion-item>
+        <ion-label fixed>Email</ion-label>
+        <ion-input type="email" formControlName="email" advs-email placeholder="eg. user@gmail.com" id="email" minlength="10" maxlength="50" required="true"></ion-input>
+      </ion-item>
+
+      <div *ngIf="password.invalid && (password.dirty || password.touched || submitted)" class="errorText">
+        <div *ngIf="password.errors.required">
+          Password is required.
+        </div>
+        <div *ngIf="password.errors.minlength">
+          Password must be at least 6 characters long.
+        </div>
+        <div *ngIf="password.errors.maxlength">
+          Password cannot exceed 32 characters.
+        </div>
+      </div>
+
+      <ion-item>
+        <ion-label fixed>Password</ion-label>
+        <ion-input type="password" formControlName="password" advs-compare="verify" placeholder="eg. password" id="password" minlength="6" maxlength="32" required="true"></ion-input>
+      </ion-item>
+
+      <div *ngIf="verify.invalid && (verify.dirty || verify.touched || submitted)" class="errorText">
+        <div *ngIf="verify.errors.required">
+          Verify password is required.
+        </div>
+        <div *ngIf="verify.errors.compare && !verify.errors.required">
+          Password mismatch.
+        </div>
+      </div>
+
+      <ion-item>
+        <ion-label fixed>Verify</ion-label>
+        <ion-input type="password" formControlName="verify" advs-compare="password" placeholder="eg. password" id="verify" minlength="6" maxlength="50" required="true"></ion-input>
+      </ion-item>
+
+      <div style="padding: 13px">
+        <h4>Profile Details</h4>
+      </div>
+
+      <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched || submitted)" class="errorText">
+        <div *ngIf="firstName.errors.required">
+          First Name is required.
+        </div>
+        <div *ngIf="firstName.errors.maxlength">
+          First Name cannot exceed 32 characters.
+        </div>
+      </div>
+
+      <ion-item>
+        <ion-label fixed>First Name</ion-label>
+        <ion-input type="text" formControlName="firstName" placeholder="eg. Jason" id="firstName" maxlength="32" required="true"></ion-input>
+      </ion-item>
+
+      <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched || submitted)" class="errorText">
+        <div *ngIf="lastName.errors.required">
+          Last Name is required.
+        </div>
+        <div *ngIf="lastName.errors.maxlength">
+          Last Name cannot exceed 32 characters.
+        </div>
+      </div>
+
+      <ion-item>
+        <ion-label fixed>Last Name</ion-label>
+        <ion-input type="text" formControlName="lastName" placeholder="eg. Tan" id="lastName" maxlength="32" required="true"></ion-input>
+      </ion-item>
+
+      <div *ngIf="mobileNumber.invalid && (mobileNumber.dirty || mobileNumber.touched || submitted)" class="errorText">
+        <div *ngIf="mobileNumber.errors.required">
+          Mobile Number is required.
+        </div>
+        <div *ngIf="mobileNumber.errors.minlength">
+          Mobile number must be 8 characters long.
+        </div>
+        <div *ngIf="mobileNumber.errors.maxlength">
+          Mobile number must be 8 characters long.
+        </div>
+        <div *ngIf="mobileNumber.errors.mobileNumber">
+          Mobile number must be valid.
+        </div>
+      </div>
+
+      <ion-item>
+        <ion-label fixed>Contact</ion-label>
+        <ion-input type="text" formControlName="mobileNumber" placeholder="eg. 98765432" id="mobileNumber" minlength="8" maxlength="8" required="true"></ion-input>
+      </ion-item>
+
+      <div align="center">
+          <button type="submit" ion-button outline [disabled]="!register.valid">
+            Register
+          </button>
+        </div>
+    </form>
+  </div>
+</ion-content>

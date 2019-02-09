@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Write a Review</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-left color="dark" (click)="cartTapped($event, page)">
+        <ion-icon name="cart"></ion-icon>
+        Cart
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+  
+<ion-content padding class="bg-style">
+  <div *ngIf="!isSent" style="padding: 13px">
+    <form [formGroup]="createReview" (ngSubmit)="sendReview(createReviewForm)">
+      <ion-item>
+        <ion-label fixed>Title</ion-label>
+        <ion-input type="text" formControlName="title" placeholder="eg. Good Service" id="title" required="true"></ion-input>
+      </ion-item>
+
+      <div *ngIf="title.invalid && (title.dirty || title.touched || submitted)" class="errorText">
+        <div *ngIf="title.errors.required">
+          Title is required.
+        </div>
+      </div>
+
+      <ion-item text-wrap>
+        <ion-label fixed>Your Review</ion-label>
+        <ion-textarea text-wrap float-left type="text" formControlName="comment" placeholder="eg. The shop's service was good!" id="comment" required="true"></ion-textarea>
+      </ion-item>
+
+      <div *ngIf="comment.invalid && (comment.dirty || comment.touched || submitted)" class="errorText">
+        <div *ngIf="comment.errors.required">
+          Your review is required.
+        </div>
+      </div>
+
+      <ion-item style="padding: 0 50px">
+        <ion-label color="dark">Rating</ion-label>
+        <ion-range formControlName="rating" id="rating" min="1" max="5" step="1" snaps="true" color="medium-pink" require="false">
+          <ion-icon small range-left name="star" color="medium-pink"></ion-icon>
+          <ion-icon range-right name="star" color="medium-pink"></ion-icon>
+        </ion-range>
+      </ion-item>
+
+      <button type="submit" ion-button outline [disabled]="!createReview.valid">
+        Review
+      </button>
+    </form>
+
+    <!-- <mbsc-form [options]="formSettings">
+      <div class="mbsc-form-group">
+        <mbsc-input [(ngModel)]="title" placeholder="Text field label">Title</mbsc-input>
+        <mbsc-textarea [(ngModel)]="comment">Review</mbsc-textarea>
+
+        <mbsc-rating [(ngModel)]="rating">Rating</mbsc-rating>
+
+        <button type="submit" ion-button outline>
+          Create Review
+        </button>
+      </div>
+    </mbsc-form> -->
+  </div>
+
+  <div *ngIf="isSent" style="padding: 13px">
+    <h4>Your response has been recorded!</h4>
+    <button ion-button color="primary" outline (click)="homeTapped($event, page)">Back To Home</button>
+  </div>
+</ion-content>
+  

@@ -1,0 +1,77 @@
+// http://ionicframework.com/docs/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+
+@import url('https://fonts.googleapis.com/css?family=Work+Sans');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+.bg-style {
+  background: white; //white
+}
+
+@font-face{
+  font-family: 'Work Sans';
+  font-weight: Extra-Light;
+  src: url(https://fonts.googleapis.com/css?family=Work+Sans)
+}
+
+@font-face {
+  font-family: roboto;
+  src: url(../assets/fonts/roboto.woff2)
+}
+
+@font-face {
+  font-family: ubuntu;
+  src: url(../assets/fonts/ubuntu.woff2);
+  font-weight: light;
+  font-style: normal;
+}
+
+ion-title, h1, h2, h3, h4, h5, h6, ion-label, ion-input, ion-content {
+  font-family: Ubuntu;
+  color: #E7B0D0;
+}
+
+ion-toolbar{
+  border-bottom: 2px solid #E7B0D0;
+}
+
+.card {
+  background-color: #F6E6E7; //light pink
+}
+
+.titleicon {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  text-align:center;
+}
+
+.button {
+  font-family: ubuntu;
+  color: #333333;
+  background: #F6E6E7;
+  font-size: 14px;
+  font-weight: regular;
+  border-color: #999999;
+}
+
+label, input, select, textarea {
+  font-family: ubuntu;
+  line-height: normal;
+}

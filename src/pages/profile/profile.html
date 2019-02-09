@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <button ion-button menuToggle colour="dark">
+          <ion-icon name="menu"></ion-icon>
+      </button>
+    <ion-title>Manage Profile</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-left color="dark" (click)="cartTapped($event, page)">
+            <ion-icon name="cart"></ion-icon>
+            Cart
+          </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-style">
+  <div *ngIf="!isUpdated" style="padding: 13px">
+    <div>
+      <!-- <p>First Name: {{this.currFirstName}}</p>
+      <p>Last Name: {{this.currLastName}}</p>
+      <p>Contact: {{this.currMobileNumber}}</p> -->
+      <p>Email Address: {{this.email}}</p>
+    </div>
+
+    <h4>Edit Profile</h4>
+    <form [formGroup]="updateProfile" (ngSubmit)="update(updateProfileForm)">
+      <ion-item>
+        <ion-label fixed>First Name</ion-label>
+        <ion-input type="text" formControlName="firstName" placeholder={{currFirstName}} id="firstName" maxlength="32" required="true"></ion-input>
+      </ion-item>
+
+      <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched || submitted)" class="errorText">
+        <div *ngIf="firstName.errors.required">
+          First Name is required.
+        </div>
+        <div *ngIf="firstName.errors.maxlength">
+          First Name cannot exceed 32 characters.
+        </div>
+      </div>
+
+      <ion-item>
+        <ion-label fixed>Last Name</ion-label>
+        <ion-input type="text" formControlName="lastName" placeholder={{currLastName}} id="lastName" maxlength="32" required="true"></ion-input>
+      </ion-item>
+
+      <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched || submitted)" class="errorText">
+        <div *ngIf="lastName.errors.required">
+          Last Name is required.
+        </div>
+        <div *ngIf="lastName.errors.maxlength">
+          Last Name cannot exceed 32 characters.
+        </div>
+      </div>
+
+      <ion-item>
+        <ion-label fixed>Contact</ion-label>
+        <ion-input type="text" formControlName="mobileNumber" placeholder={{currMobileNumber}} id="mobileNumber" minlength="8" maxlength="8" required="true"></ion-input>
+      </ion-item>
+
+      <div *ngIf="mobileNumber.invalid && (mobileNumber.dirty || mobileNumber.touched || submitted)" class="errorText">
+        <div *ngIf="mobileNumber.errors.required">
+          Mobile Number is required.
+        </div>
+        <div *ngIf="mobileNumber.errors.minlength">
+          Mobile number must be 8 characters long.
+        </div>
+        <div *ngIf="mobileNumber.errors.maxlength">
+          Mobile number must be 8 characters long.
+        </div>
+      </div>
+
+      <button type="submit" color="primary" ion-button outline [disabled]="!updateProfile.valid">
+        Save Changes
+      </button>
+    </form>
+  </div>
+
+  <div *ngIf="isUpdated" style="padding: 13px">
+    <h3>Successfully Updated Profile</h3>
+    <h4>Updated Details</h4>
+    <p>First Name: {{this.user.firstName}}</p>
+    <p>Last Name: {{this.user.lastName}}</p>
+    <p>Contact: {{this.user.mobileNumber}}</p>
+    <button ion-button color="primary" outline (click)="homeTapped($event, page)">Back To Home</button>
+  </div>
+
+  <div style="padding: 13px">
+    <button ion-button color="primary" outline (click)="buttonTapped($event, page)">Change Password</button>
+  </div>
+</ion-content>

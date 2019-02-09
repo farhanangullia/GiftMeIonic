@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <button ion-button menuToggle colour="primary">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Order ID: {{this.deliveryCode}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-left color="dark" (click)="cartTapped($event, page)">
+        <ion-icon name="cart"></ion-icon>
+        Cart
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="bg-style">
+  <ion-list *ngFor="let product of products">
+    <ion-card>
+      <ion-card-content>
+        <b>Product Name</b>: {{product.product.productName}}
+        <br/>
+        <b>Price</b>: ${{product.product.price}}
+        <br/>
+        <b>Quantity</b>: {{product.quantity}}
+        <br/>
+        <b>Total Amount</b>: ${{product.product.price*product.quantity}}
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+  <div style="padding: 13px">
+    <b>Delivery Address</b>: {{this.address}}
+    <br/><br/>
+    <b>Discount</b>: ${{this.discount}}
+  </div>
+</ion-content>

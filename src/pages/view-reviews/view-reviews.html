@@ -1,0 +1,68 @@
+
+<ion-header>
+
+  <ion-navbar color="secondary">      
+    <ion-title>Reviews</ion-title>      
+      
+    <ion-buttons end>
+      <button ion-button icon-left color="dark" (click)="cartTapped($event, page)">
+        <ion-icon name="cart"></ion-icon>
+        Cart
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding class="bg-style">
+
+  <div *ngIf="errorMessage" class="errorText">
+    {{errorMessage}}
+  </div>
+
+  <ion-grid>
+    <div *ngIf="hasReviews">
+      <ion-list *ngFor="let review of reviews">
+
+        <ion-row>     
+          <ion-col>
+            <ion-card>
+              <ion-item>
+                <b>Title:</b> 
+                {{review.title}}<br/>
+                <ion-item text-wrap style="padding:0">
+                  <p class="text-sm text-gray">
+                    Reviewer: {{review.customerName}}       
+                  </p> 
+                </ion-item>
+                
+                <!--show in small print custName-->
+              </ion-item>
+          
+              <ion-item>                        
+                <b>Rating:</b>
+                {{review.rating}} <br/>
+                <b>Comment:</b> 
+                {{review.comment}}                
+              </ion-item>
+            </ion-card>
+          </ion-col>
+
+        </ion-row>
+      </ion-list>
+
+    </div>  
+    
+    <div *ngIf="!hasReviews">
+      <h3>There are no Reviews for this Shop</h3>
+    </div>
+    
+    <div>
+      <button ion-button outline (click)="addReview()">
+        Add Review
+      </button>
+    </div>
+
+  </ion-grid>
+
+</ion-content>

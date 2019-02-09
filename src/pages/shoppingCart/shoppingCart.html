@@ -1,0 +1,117 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <button ion-button menuToggle colour="dark">
+          <ion-icon name="menu"></ion-icon>
+      </button>  
+    <ion-title>Shopping Cart</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="bg-style">
+  
+  <div *ngIf="cartExists">
+    <div class="shopping-cart" *ngFor="let product of products">
+
+      <ion-card>        
+        <ion-item no-padding class="item item-md" style= "padding-right: 1px;">
+          <div class="item-inner">
+            <div class="input-wrapper" style="margin-right: -12%">
+              <ion-grid>
+                <ion-row>
+                  <ion-col col-4 align-self-end>              
+                    <div text-center>
+                      <img align style="max-width: 80%;" src="{{product.product.imgPath}}"/>          
+                    </div>          
+                  </ion-col>   
+                  
+                  <ion-col col-8 no-padding >                
+                    <button float-right style="width: 70%; margin-right: 10%;" ion-button outline (click)="removeProduct(product.product.productId)"> 
+                      <ion-icon class= "font" name="remove-circle" >
+                        <label>Remove</label>
+                      </ion-icon>
+                    </button>                   
+                  </ion-col>
+                </ion-row>
+                    
+                <div text-wrap class="product-name">
+                  <strong>Product Name:</strong>
+                  <span>{{product.product.productName}}</span> 
+                </div>
+
+                <div class="product-price">
+                  <b>Product Price:</b>
+                  ${{product.product.price}} 
+                </div>
+                
+                <div class="product-price">
+                  <b>Quantity:</b>
+                
+                  <form method="post" class="row">
+                    <div class="col-md-4 col-sm-3">
+                      <div class="form-element">
+                        <input type="number" class="form-control" placeholder="{{product.quantityInCart}}" required [(ngModel)]="product.quantityInCart" [ngModelOptions]="{standalone:true}" min=1 max={{product.product.quantityOnHand}}>
+                      </div> 
+                    
+                    <div class="col-md-4 col-sm-5">
+                      <button type="submit" class="btn btn-default btn-ghost btn-block space-top-none space-bottom" (click)=updateQuantity(product.product.productId)>Update Quantity</button>
+                    </div>
+                  </div> 
+                  </form>
+                </div>
+                
+              </ion-grid>
+            </div>
+          </div>
+        </ion-item>
+      </ion-card>
+    </div>
+  
+    <ion-grid>
+      <ion-row>
+        <ion-col col-9 align-self-end>
+          <ion-card padding >
+            <div>
+              <b>Subtotal: </b>
+              ${{subtotal}} <br/>
+            </div>
+            <div>
+              <b>Delivery Fee:</b>
+              ${{deliveryFee}}
+            </div> <br/>
+
+            <div>  
+              <form method="post" class="row">
+                <div class="col-md-6 col-sm-5">
+                  <div class="form-element">
+                    <input type="text" style="width: 90%;" class="form-control" placeholder="Enter coupon" required [(ngModel)]="promoCode" [ngModelOptions]="{standalone:true}">
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-3" *ngIf="!appliedPromo">
+                  <button type="submit" class="btn btn-default btn-ghost btn-block space-top-none space-bottom" (click)=applyPromo(promoCode)>Apply Coupon</button> 
+                </div> 
+                <div class="col-md-4 col-sm-3" *ngIf="appliedPromo">
+                  <button type="submit" class="btn btn-default btn-ghost btn-block space-top-none space-bottom" (click)=removePromo(promoCode)>Remove Coupon</button> 
+                </div> 
+              </form> <br/>
+              
+              <span>
+                <b>Total: </b>
+                ${{total}}<br/> 
+              </span>
+
+            </div>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-buttons end>
+      <button ion-button color="primary" outline (click)="buttonTapped($event, page)">Checkout</button>
+    </ion-buttons>
+  </div>
+
+  <div style="text-align:center" *ngIf="!cartExists">
+    <img style="width: 30%" src="../assets/img/empty-state-icons/cart-edited.svg"/>
+		<h2>Your cart is empty</h2>				
+	</div>	
+</ion-content>

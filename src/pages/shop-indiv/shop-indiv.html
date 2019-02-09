@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <ion-list *ngIf="shopToView != null">
+      <ion-title style="margin-top: 8%">{{shopToView.shopName}}</ion-title>
+    </ion-list>
+    
+    <ion-buttons end>
+      <button ion-button icon-left color="dark" (click)="cartTapped($event, page)">
+        <ion-icon name="cart"></ion-icon>
+        Cart
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="bg-style">
+  <div *ngIf="errorMessage" class="errorText">
+    {{errorMessage}}
+  </div>
+  
+  <div *ngIf="infoMessage" class="infoText">
+    {{infoMessage}}
+  </div>
+
+  <ion-list *ngIf="shopToView != null">
+    <ion-grid>
+      <ion-row center>
+        <ion-col text-center>
+          <img width="180" height="70" src="{{shopToView.imgPath}}"/>
+          <br>                      	
+
+          <ion-item>
+            <b>Shop Name: </b>
+            {{shopToView.shopName}} <br/>            
+                     
+            <ion-item text-wrap style="padding:0">
+              <b>Location: </b>   
+              <i>{{shopToView.location}}</i> <br/>  
+
+              <b>Area: </b>
+              <i>{{shopToView.area}}</i>
+            </ion-item>
+          </ion-item> <br/>
+
+          <span>
+            <h2 align="left" padding>Products</h2>
+          </span>
+          <ion-list *ngFor="let product of products">
+          
+            <ion-card (click)="viewProduct(product.productId)">      
+              <ion-item>
+                <div style= "width: auto; height:auto" align="middle">
+                  <img class="resize" src="{{product.imgPath}}"/>
+                </div> <br> 
+                               
+                {{product.productName}}
+              </ion-item>
+
+              <ion-item>        
+                ${{product.price}}
+              </ion-item>
+            </ion-card> <br/>
+          </ion-list>
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+
+
+  <div style="padding: 13px">
+    <button ion-button outline (click)="viewReview($event, shopToView.shopId)">View Reviews</button>
+  </div>
+</ion-content>

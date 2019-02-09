@@ -1,0 +1,94 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <ion-list *ngIf="productToView != null">
+      <ion-title style="margin-top: 8%">{{productToView.productName}}</ion-title>
+    </ion-list>
+    <ion-buttons end>
+      <button ion-button icon-left color="dark" (click)="cartTapped($event, page)">
+        <ion-icon name="cart"></ion-icon>
+        Cart
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="bg-style">	
+
+  <div *ngIf="errorMessage" class="errorText">
+    {{errorMessage}}
+  </div>
+    
+  <div *ngIf="infoMessage" class="infoText">
+    {{infoMessage}}
+  </div>
+
+  <ion-list *ngIf="productToView != null">
+    <ion-grid>
+      <ion-row center>
+        <ion-col text-center width-50 offset-25>        
+          <img style= "width: 60%; background-color: white" src="{{productToView.imgPath}}"/>
+          <br>          
+          
+          <ion-item>
+            <b>Product Name: </b><br/>
+            {{productToView.productName}} <br/>
+            <ion-item text-wrap style="padding:0">
+              <p class="text-sm text-gray">{{productToView.description}}                
+              </p> 
+            </ion-item>        
+          </ion-item>    
+
+
+          <ion-item>            
+            <div class="product-price">
+              <strong>Product Price:</strong>  
+              <span>${{productToView.price}}</span>
+            </div> <br/>
+
+            <div class="product-sku">
+              <strong>SKU: </strong>
+              <span>{{productToView.skuCode}}</span>
+            </div> <br/>
+
+            <div class="product-category">
+              <strong>Category: </strong>
+              <span>{{productToView.category}}</span>
+            </div> <br/>
+
+            <span class="product-rating text-warning" (click)="redirectToShop(productToView.shop.shopId)">
+              <strong>Seller: </strong>                
+              <a><u><font color="e299c4">{{productToView.shop?.shopName}}</font></u></a>
+            </span>
+          </ion-item>                    
+           
+            <div>         
+              <div *ngIf="inquantity.invalid && (inquantity.dirty || inquantity.touched || submitted)" class="errorText">
+                <div *ngIf="inquantity.errors.required">
+                  Quantity is required.
+                </div>
+                <div *ngIf="inquantity.errors.min">
+                  Quantity must be at least 1.
+                </div>
+                <div *ngIf="inquantity.errors.max">
+                  Quantity selected is more than maximum quantity in stock. Please Reselect Quantity.                
+                </div>                            
+              </div>
+
+              <div *ngIf="addToCartErrorMessage" class="errorText">
+                {{addToCartErrorMessage}}
+              </div>  
+            </div>
+                        
+            <ion-item>
+              <ion-label><b>{{ 'Quantity:' }}</b></ion-label>                                            
+              <ion-input type="number" placeholder="Select Quantity" [(ngModel)]="quantitySelected" name="quantity" min=1 max={{productToView.quantityOnHand}} required="true" #inquantity="ngModel"></ion-input>
+            </ion-item>  
+            
+            <button (click) = "addToCart()" ion-button color="dark" outline>{{ 'Add to Cart' }}</button>
+            
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+
+</ion-content>

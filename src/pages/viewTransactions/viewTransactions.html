@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <button ion-button menuToggle colour="primary">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>View Transactions</ion-title>
+    <ion-buttons end>
+    <button ion-button icon-left color="dark" (click)="cartTapped($event, page)">
+      <ion-icon name="cart"></ion-icon>
+        Cart
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-style">
+  <!-- <div style="padding: 13px"> -->
+    <ion-list *ngFor="let transaction of transactions.reverse()">
+      <ion-card (click)="indivTransaction(transaction.transactionDeliveryCode)">
+        <ion-card-header>
+          <b>Order ID</b>: {{transaction.transactionDeliveryCode}}
+        </ion-card-header>
+        <ion-card-content>
+          <b>Date & Time</b>: {{transaction.transactionDatePurchased}}
+          <br/>
+          <b>Total Amount</b>: ${{transaction.transactionTotal}}
+          <br/>
+          <b>Status</b>: {{transaction.transactionStatus}}
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+  <!-- </div> -->
+
+  <div style="text-align:center" *ngIf="!hasTransactions">
+    <img style="width: 30%; margin-top: 5%" src="../assets/img/empty-state-icons/transaction-wallet.svg"/>
+    <h3 padding>You have not made any transactions yet</h3>				
+  </div>
+</ion-content>

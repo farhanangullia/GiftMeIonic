@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <button ion-button menuToggle colour="dark">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <div class="titleicon">
+      <img src="../assets/img/giftme-logo.png" width="100px" style="margin-bottom: -0.9%" />
+   </div>
+
+    <ion-buttons end>
+      <button ion-button icon-left color="dark" (click)="cartTapped($event, page)">
+        <ion-icon name="cart" color="light"></ion-icon>
+        <h6> Cart </h6>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="bg-style">
+  <ion-item>
+    <h1 style="font-size: 22px;">Featured Shops</h1>
+    <ion-slides *ngIf="filteredShops && filteredShops.length" pager autoplay="5000" speed="1000" slidesPerView="2" loop>
+      <ion-slide *ngFor="let shop of filteredShops">
+        <img class="shopResize" src="{{shop.imgPath}}" (click)= "redirectShop(shop.shopId)"/><br>
+        <p style="color: #E7B0D0">{{shop.shopName}}</p>
+      </ion-slide>
+    </ion-slides>
+  </ion-item>
+
+  <h1 padding style="font-size: 22px;">Latest Products</h1>   
+  <ion-row class="row" responsive-sm wrap>
+    <ion-col width-45 *ngFor="let product of filteredProducts">
+    <img class="prdtResize" src="{{product.imgPath}}" (click)= "redirectProduct(product.productId)"/> <br>
+    <p style="color: #E7B0D0">{{product.productName}}</p>
+    </ion-col>
+  </ion-row>
+  <!-- <ion-slides *ngIf="filteredProducts && filteredProducts.length" pager autoplay="5000" speed="1000" slidesPerView="2" loop>
+    <ion-slide *ngFor="let product of filteredProducts">
+    	<img class="prdtResize" src="{{product.imgPath}}" (click)= "redirectProduct(product.productId)"/> <br>
+    	<p style="color: #E7B0D0">{{product.productName}}</p>
+    </ion-slide>
+  </ion-slides>   -->
+
+</ion-content>

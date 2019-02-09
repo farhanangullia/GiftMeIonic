@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <button ion-button menuToggle color="dark">
+          <ion-icon name="menu"></ion-icon>
+      </button>
+    <ion-title>Transaction Details</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="bg-style">
+
+  <div style="padding: 13px; text-align:center">
+    <img style="width: 30%;" src="../assets/img/empty-state-icons/checked.svg"/>
+
+    <h3>Your transaction is successful!</h3>
+
+    <button ion-button color="primary" outline (click)="homeTapped($event, page)">Back To Home</button>
+	</div>
+</ion-content>

@@ -1,0 +1,14 @@
+{
+  "name": "giftMe-app",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  },
+  "proxies": [
+  	{
+  		"path": "/api",
+  		"proxyUrl": "http://localhost:8080/GiftMe-war/Resources"
+  	}
+  ]
+}

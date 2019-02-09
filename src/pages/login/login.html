@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <button ion-button menuToggle colour="dark">
+    	<ion-icon name="menu"></ion-icon>
+		</button>
+		<div *ngIf="!isLogin">
+			<ion-title>Login</ion-title>
+		</div>
+		<div *ngIf="isLogin">
+			<ion-title>Log Out</ion-title>
+		</div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="bg-style">
+	<div *ngIf="!isLogin">
+		<form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+
+			<div>
+				<div *ngIf="inemail.invalid && (inemail.dirty || inemail.touched || submitted)" class="errorText">
+					<div *ngIf="inemail.errors.required">
+						Email is required.
+					</div>
+					<div *ngIf="inemail.errors.minlength">
+						Email must be at least 4 characters long.
+					</div>
+					<div *ngIf="inemail.errors.maxlength">
+						Email cannot exceed 50 characters.
+					</div>
+					<div *ngIf="inemail.errors?.email">
+						Email must be valid.
+					</div>
+				</div>
+
+        <ion-item>
+					<ion-label fixed>Email</ion-label>
+					<ion-input type="email" placeholder="Eg. user@gmail.com" id="email" name="email" [(ngModel)]="email" minlength="4" maxlength="32" required="true" email #inemail="ngModel"></ion-input>
+				</ion-item>
+
+				<div *ngIf="inpassword.invalid && (inpassword.dirty || inpassword.touched || submitted)" class="errorText">
+					<div *ngIf="inpassword.errors.required">
+						Password is required.
+					</div>
+					<div *ngIf="inpassword.errors.minlength">
+						Password must be at least 4 characters long.
+					</div>
+					<div *ngIf="inpassword.errors.maxlength">
+						Password cannot exceed 32 characters.
+					</div>
+				</div>
+
+        <ion-item>
+					<ion-label fixed>Password</ion-label>
+					<ion-input type="password" placeholder="Eg. password" id="password" name="password" [(ngModel)]="password" minlength="4" maxlength="32" required="true" #inpassword="ngModel"></ion-input>
+				</ion-item>
+
+				<div *ngIf="loginErrorMessage" class="errorText">
+					{{loginErrorMessage}}
+				</div>
+			</div>
+
+      <div align="center">
+        <button block type="submit" ion-button outline>
+          Login
+				</button>
+				<button block (click)="register()" ion-button outline>
+					Register
+				</button> <br/><br/>
+      </div>
+
+			Forgot Your Password?
+			<a (click)="getPassword()"><font color="#e299c4"> <br/> Click here to retrieve your password!</font> </a>
+			<!-- <button small ion-button outline (click)="register()">
+				Sign Up
+			</button> -->
+		</form>
+	</div>
+
+	<div *ngIf="isLogin">
+		<h3>Welcome Back, {{firstName}}!</h3>
+		<br/>
+		<button ion-button align="center" (click)="logout()">
+			Log out
+		</button>
+	</div>
+
+</ion-content>
